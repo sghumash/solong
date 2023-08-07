@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sghumash <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 22:37:29 by sghumash          #+#    #+#             */
+/*   Updated: 2023/08/02 15:35:57 by sghumash         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
 void	img_draw(t_game *game, void *image, int x, int y)
@@ -61,4 +73,5 @@ void	tombstone_draw(t_game *game)
 		(game->mlx, "assets/images/T.xpm", &game->img_w, &game->img_h);
 	game->endgame = 1;
 	map_draw(game);
+	exit_game(game);
 }

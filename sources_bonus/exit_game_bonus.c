@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_game_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sghumash <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 22:37:39 by sghumash          #+#    #+#             */
+/*   Updated: 2023/08/02 15:28:43 by sghumash         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
 void	free_map(char **map)
@@ -23,8 +35,32 @@ int	exit_game(t_game *game)
 	mlx_destroy_image(game->mlx, game->img_exit);
 	mlx_destroy_image(game->mlx, game->img_enemie);
 	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
+	while(1)
+	;
 	exit(0);
 	return (0);
+}
+
+void	map_cord_finder(t_game *game)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	while (game->map[y] != NULL)
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'P')
+			{
+				game->cords.player.x = x;
+				game->cords.player.y = y;
+			}
+			x++;
+		}
+		y++;
+	}
+	game->cords.exitt.x = ft_strlen(game->map[0]);
+	game->cords.exitt.y = y;
 }

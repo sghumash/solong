@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gameplay.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sghumash <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 22:24:18 by sghumash          #+#    #+#             */
+/*   Updated: 2023/08/07 20:06:15 by sghumash         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long.h"
 
 static void	game_events(int keycode, t_game *game)
@@ -31,8 +42,13 @@ static int	keypress(int keycode, t_game *game)
 	else if (!game->endgame)
 	{
 		game_events(keycode, game);
-		printf("Moves: %d\n", game->moves);
+		write(1, "Moves: ", 7);
+		ft_putnbr_fd(game->moves, 1);
+		write(1, "\n", 1);
 	}
+	else if (game->map[game->y_player][game->x_player] == 'E'
+			&& game->n_colect == 0)
+		exit_game(game);
 	return (0);
 }
 

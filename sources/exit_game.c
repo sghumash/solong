@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sghumash <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 22:24:18 by sghumash          #+#    #+#             */
+/*   Updated: 2023/08/02 15:25:14 by sghumash         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	free_map(char **map)
@@ -22,8 +34,8 @@ int	exit_game(t_game *game)
 	mlx_destroy_image(game->mlx, game->img_colect);
 	mlx_destroy_image(game->mlx, game->img_exit);
 	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
+	while(1)
+	;
 	exit(0);
 	return (0);
 }

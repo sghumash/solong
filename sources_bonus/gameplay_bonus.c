@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gameplay_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sghumash <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 22:37:50 by sghumash          #+#    #+#             */
+/*   Updated: 2023/08/02 15:33:22 by sghumash         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
 static void	game_events(int keycode, t_game *game)
@@ -30,6 +42,9 @@ static int	keypress(int keycode, t_game *game)
 		exit_game(game);
 	else if (!game->endgame)
 		game_events(keycode, game);
+	else if (game->map[game->y_player][game->x_player] == 'E'
+				&& game->n_colect == 0)
+		exit_game(game);
 	return (0);
 }
 

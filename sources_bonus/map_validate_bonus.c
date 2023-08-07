@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_validate_bonus.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sghumash <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 22:38:17 by sghumash          #+#    #+#             */
+/*   Updated: 2023/07/25 22:38:19 by sghumash         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
 static int	is_retangular(char **map)
@@ -67,7 +79,7 @@ static int	is_pec(t_game *game)
 		}
 		i++;
 	}
-	if (game->n_player != 1 || game->n_exit == 0 || game->n_colect == 0)
+	if (game->n_player != 1 || game->n_exit != 1 || game->n_colect == 0)
 		return (0);
 	return (1);
 }

@@ -2,8 +2,8 @@
 LIBFT_PATH		=	./libraries/libft
 LIBFT			=	$(LIBFT_PATH)/libft.a
 
-MINILIBX_PATH	=	./libraries/minilibx
-MINILIBX		=	$(MINILIBX_PATH)/libmlx.a
+# MINILIBX_PATH	=	./libraries/minilibx
+# MINILIBX		=	$(MINILIBX_PATH)/libmlx.a
 
 SOURCES_FILES	=	so_long.c \
 					draw.c \
@@ -12,7 +12,9 @@ SOURCES_FILES	=	so_long.c \
 					map_validate.c \
 					player_update.c \
 					gameplay.c \
-					exit_game.c
+					exit_game.c \
+					flood_fill.c \
+					map_errors.c \
 
 SOURCES_BONUS	=	so_long_bonus.c \
 					draw_bonus.c \
@@ -23,7 +25,9 @@ SOURCES_BONUS	=	so_long_bonus.c \
 					gameplay_bonus.c \
 					exit_game_bonus.c \
 					moves_bonus.c \
-					animation_bonus.c
+					animation_bonus.c \
+					flood_fill.c \
+					map_errors.c 
 
 
 SOURCES_DIR		=	sources
@@ -41,24 +45,31 @@ OBJECTS_BONUS	= 	$(BONUS_FILES:.c=.o)
 NAME			=	so_long
 NAME_BONUS		=	so_long_bonus
 
-CC				=	clang
+# CC				=	clang
+CC				=	cc
 RM				=	rm -f
 
 CFLAGS			=	-Wall -Wextra -Werror
-MLXFLAGS		=	-L. -lXext -L. -lX11
+# MLXFLAGS		=	-L. -lXext -L. -lX11
+MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
-.c.o:
-				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+# .c.o:
+# 				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+
+.c.o: 
+	$(CC) $(CFLAGS) -Imlx -c $< -o $(<:.c=.o)
 
 all:			$(NAME)
 
 bonus:			$(NAME_BONUS)
 
-$(NAME):		$(LIBFT) $(MINILIBX) $(OBJECTS) $(HEADER)
-				$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MINILIBX) $(MLXFLAGS) -o $(NAME)
+# $(NAME):		$(LIBFT) $(MINILIBX) $(OBJECTS) $(HEADER)
+# 				$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MINILIBX) $(MLXFLAGS) -o $(NAME)
+$(NAME):		$(LIBFT) $(OBJECTS) $(HEADER)
+				$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(MLXFLAGS) -o $(NAME)
 
-$(NAME_BONUS):		$(LIBFT) $(MINILIBX) $(OBJECTS_BONUS) $(HEADER_BONUS)
-					$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT) $(MINILIBX) $(MLXFLAGS) -o $(NAME_BONUS)
+$(NAME_BONUS):		$(LIBFT) $(OBJECTS_BONUS) $(HEADER_BONUS)
+					$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT) $(MLXFLAGS) -o $(NAME_BONUS)
 
 $(LIBFT):
 				$(MAKE) -C $(LIBFT_PATH)
@@ -68,7 +79,6 @@ $(MINILIBX):
 
 clean:
 				$(MAKE) -C $(LIBFT_PATH) clean
-				$(MAKE) -C $(MINILIBX_PATH) clean
 				$(RM) $(OBJECTS) $(OBJECTS_BONUS)
 
 fclean:			clean

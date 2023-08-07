@@ -7,7 +7,10 @@ SRC =	ft_strdup.c \
 		ft_strlen.c \
 		ft_split.c \
 		ft_itoa.c \
-		get_next_line.c
+		get_next_line.c\
+		ft_putnbr_fd.c\
+		ft_putchar_fd.c\
+		ft_strtrim.c
 
 OBJECTS = $(SRC:.c=.o)
 

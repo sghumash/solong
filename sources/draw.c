@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sghumash <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 22:24:18 by sghumash          #+#    #+#             */
+/*   Updated: 2023/07/25 22:24:28 by sghumash         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	img_draw(t_game *game, void *image, int x, int y)
@@ -50,4 +62,28 @@ int	map_draw(t_game *game)
 		y++;
 	}
 	return (0);
+}
+
+void	map_cord_finder(t_game *game)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	while (game->map[y] != NULL)
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'P')
+			{
+				game->cords.player.x = x;
+				game->cords.player.y = y;
+			}
+			x++;
+		}
+		y++;
+	}
+	game->cords.exitt.x = ft_strlen(game->map[0]);
+	game->cords.exitt.y = y;
 }

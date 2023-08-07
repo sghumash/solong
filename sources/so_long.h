@@ -1,16 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sghumash <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/25 22:24:18 by sghumash          #+#    #+#             */
+/*   Updated: 2023/07/25 22:24:28 by sghumash         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "../libraries/minilibx/mlx.h"
+# include <mlx.h>
 # include "../libraries/libft/libft.h"
-# include <stdio.h>
 # include <fcntl.h>
+# include <unistd.h>
+
+typedef struct s_coord
+{
+	int		x;
+	int		y;
+}	t_coord;
+
+typedef struct s_linee
+{
+	char	*line;
+	int		linesize;
+}	t_linee;
+
+typedef struct s_cord
+{
+	t_coord	player;
+	t_coord	exitt;
+}	t_cord;
 
 typedef struct s_game
 {
 	void	*mlx;
 	void	*win;
 	char	**map;
+	char	**tab;
 	void	*img_backg;
 	void	*img_wall;
 	void	*img_player;
@@ -27,20 +57,21 @@ typedef struct s_game
 	int		y_player;
 	int		moves;
 	int		endgame;
+	t_cord	cords;
 }	t_game;
 
-# define KEY_ESC 65307
-# define KEY_Q 113
+# define KEY_ESC 53
+# define KEY_Q 12
 
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
 
-# define KEY_UP 65362
-# define KEY_LEFT 65361
-# define KEY_DOWN 65364
-# define KEY_RIGHT 65363
+# define KEY_UP 126
+# define KEY_LEFT 123
+# define KEY_DOWN 125
+# define KEY_RIGHT 124
 
 void	img_draw(t_game *game, void *image, int x, int y);
 int		map_draw(t_game *game);
@@ -54,5 +85,9 @@ void	player_s(t_game *game);
 void	player_a(t_game *game);
 int		exit_game(t_game *game);
 void	free_map(char **map);
+void	ft_error(void);
+void	map_cord_finder(t_game *game);
+void	flood_fill(char **tab, t_coord size, t_coord begin);
+void	player_can_win(char **map);
 
 #endif
